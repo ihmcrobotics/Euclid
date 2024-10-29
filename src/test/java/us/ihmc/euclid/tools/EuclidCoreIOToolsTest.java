@@ -30,21 +30,21 @@ public class EuclidCoreIOToolsTest
 
       RigidBodyTransform t = EuclidCoreRandomTools.nextRigidBodyTransform(random);
 
-      expected = " 0.903 -0.068  0.425 | -0.619\n" //
-                 + "-0.044  0.968  0.249 |  0.701\n" //
-                 + "-0.428 -0.243  0.870 | -0.073\n" //
+      expected = "-0.146  0.372  0.917 |  0.969\n" //
+                 + " 0.050  0.928 -0.369 |  0.028\n" //
+                 + "-0.988 -0.008 -0.154 | -0.619\n" //
                  + " 0.000  0.000  0.000 |  1.000";
       assertEquals(expected, EuclidCoreIOTools.getRigidBodyTransformString(t));
       assertEquals(expected, EuclidCoreIOTools.getRigidBodyTransformString(EuclidCoreIOTools.DEFAULT_FORMAT, t));
       assertEquals("null", EuclidCoreIOTools.getRigidBodyTransformString(null));
-      expected = "0.9026874 -0.0682468 0.4248503 | -0.6188257\n" //
-                 + "-0.0440406 0.9675040 0.2489910 | 0.7012089\n" //
-                 + "-0.4280372 -0.2434717 0.8703480 | -0.0728161\n"//
+      expected = "-0.1460544 0.3719639 0.9166848 | 0.9690608\n" //
+                 + "0.0497947 0.9282109 -0.3687071 | 0.0275034\n" //
+                 + "-0.9880226 -0.0082053 -0.1540911 | -0.6188257\n"//
                  + "0.0000000 0.0000000 0.0000000 | 1.0000000";
       assertEquals(expected, EuclidCoreIOTools.getRigidBodyTransformString(randomFormat, t));
-      expected = "0.9026874218034473 -0.06824680251960535 0.42485031771636367 | -0.6188257166341338\n" //
-                 + "-0.044040551713393175 0.9675039605360835 0.24899099612590928 | 0.7012089076126404\n" //
-                 + "-0.42803720436736 -0.2434716827330082 0.870348028885303 | -0.0728161024676699\n"//
+      expected = "-0.14605438133050594 0.3719638705161967 0.916684785913224 | 0.9690607506715772\n" //
+                 + "0.04979465293823307 0.9282109416799752 -0.36870711992628336 | 0.02750342450772747\n" //
+                 + "-0.9880225757708799 -0.008205289524678472 -0.154091086669191 | -0.6188257166341338\n"//
                  + "0.0 0.0 0.0 | 1.0";
       assertEquals(expected, EuclidCoreIOTools.getRigidBodyTransformString(null, t));
    }
@@ -88,16 +88,16 @@ public class EuclidCoreIOToolsTest
 
       QuaternionBasedTransform t = EuclidCoreRandomTools.nextQuaternionBasedTransform(random);
 
-      expected = "Quaternion:  (-0.127,  0.220,  0.006,  0.967 )\nTranslation: (-0.619,  0.701, -0.073 )";
+      expected = "Quaternion:  ( 0.141,  0.746, -0.126,  0.638 )\nTranslation: ( 0.969,  0.028, -0.619 )";
       assertEquals(expected, EuclidCoreIOTools.getQuaternionBasedTransformString(t));
       assertEquals(expected, EuclidCoreIOTools.getQuaternionBasedTransformString(EuclidCoreIOTools.DEFAULT_FORMAT, t));
       assertEquals("null", EuclidCoreIOTools.getQuaternionBasedTransformString(null));
 
-      expected = "Quaternion:  (-0.1273140, 0.2204929, 0.0062579, 0.9670237 )\nTranslation: (-0.6188257, 0.7012089, -0.0728161 )";
+      expected = "Quaternion:  (0.1412673, 0.7463840, -0.1262461, 0.6379783 )\nTranslation: (0.9690608, 0.0275034, -0.6188257 )";
       assertEquals(expected, EuclidCoreIOTools.getQuaternionBasedTransformString(randomFormat, t));
 
-      expected = "Quaternion:  (-0.12731401374363785, 0.2204929193009002, 0.006257925889866114, 0.967023708502645 )\n"
-                 + "Translation: (-0.6188257166341338, 0.7012089076126404, -0.0728161024676699 )";
+      expected = "Quaternion:  (0.14126726766904454, 0.7463840180630331, -0.12624614150672073, 0.6379783447892801 )\n"
+                 + "Translation: (0.9690607506715772, 0.02750342450772747, -0.6188257166341338 )";
       assertEquals(expected, EuclidCoreIOTools.getQuaternionBasedTransformString(null, t));
    }
 
@@ -173,13 +173,13 @@ public class EuclidCoreIOToolsTest
 
       AxisAngle t = EuclidCoreRandomTools.nextAxisAngle(random);
 
-      expected = "(-0.500,  0.866,  0.025,  0.515 )";
+      expected = "(-0.183, -0.969,  0.164, -1.758 )";
       assertEquals(expected, EuclidCoreIOTools.getAxisAngleString(t));
       assertEquals(expected, EuclidCoreIOTools.getAxisAngleString(EuclidCoreIOTools.DEFAULT_FORMAT, t));
       assertEquals("null", EuclidCoreIOTools.getAxisAngleString(null));
-      expected = "(-0.4998855, 0.8657429, 0.0245711, 0.5150467 )";
+      expected = "(-0.1834510, -0.9692615, 0.1639445, -1.7578525 )";
       assertEquals(expected, EuclidCoreIOTools.getAxisAngleString(randomFormat, t));
-      expected = "(-0.49988546154254254, 0.8657429099167103, 0.024571106351684507, 0.5150467291512681 )";
+      expected = "(-0.18345104608744625, -0.9692615363482303, 0.16394446573547383, -1.7578525333049415 )";
       assertEquals(expected, EuclidCoreIOTools.getAxisAngleString(null, t));
    }
 
