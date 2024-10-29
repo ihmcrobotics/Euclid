@@ -60,7 +60,7 @@ public abstract class QuaternionBasicsTest<T extends QuaternionBasics> extends T
          q1 = createTuple(q2.getX(), q2.getY(), q2.getZ(), q2.getS());
          assertTrue(q1.isUnitary(getEpsilon()));
 
-         double delta = 20.0 * EuclidCoreTools.squareRoot(getEpsilon());
+         double delta = 6.0 * EuclidCoreTools.squareRoot(getEpsilon());
 
          q1 = createTuple(delta + q2.getX(), q2.getY(), q2.getZ(), q2.getS());
          assertFalse(q1.isUnitary(getEpsilon()));

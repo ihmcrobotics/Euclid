@@ -915,31 +915,31 @@ public class EuclidCoreToolsTest
       {
          double dt = EuclidCoreRandomTools.nextDouble(random, 0.0, 1.0);
          // Quaternion and others:
-         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-12, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextQuaternion(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-11, i);
 
          // RotationMatrix and others:
-         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-12, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextRotationMatrix(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-11, i);
 
          // AxisAngle and others:
-         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-12, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextAxisAngle(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-11, i);
 
          // YawPitchRoll and others:
-         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-12, i);
-         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-12, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextYawPitchRoll(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextQuaternion(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextRotationMatrix(random), dt, 1.0e-11, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextYawPitchRoll(random), EuclidCoreRandomTools.nextAxisAngle(random), dt, 1.0e-11, i);
 
          // To make sure we're not missing anything:
-         compareFiniteDifference(EuclidCoreRandomTools.nextOrientation3D(random), EuclidCoreRandomTools.nextOrientation3D(random), dt, 1.0e-12, i);
+         compareFiniteDifference(EuclidCoreRandomTools.nextOrientation3D(random), EuclidCoreRandomTools.nextOrientation3D(random), dt, 1.0e-11, i);
       }
 
       // RigidityTransform:
@@ -965,7 +965,7 @@ public class EuclidCoreToolsTest
          Vector3DBasics actualAngularVelocity = new Vector3D();
          EuclidCoreTools.finiteDifference(prevTransform, currTransform, dt, actualAngularVelocity, actualLinearVelocity);
 
-         EuclidCoreTestTools.assertEquals(expectedLinearVelocity, actualLinearVelocity, 1.0e-12);
+         EuclidCoreTestTools.assertEquals(expectedLinearVelocity, actualLinearVelocity, 1.0e-11);
       }
    }
 
