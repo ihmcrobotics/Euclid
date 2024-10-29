@@ -1555,9 +1555,11 @@ public class EuclidCoreRandomTools
     */
    public static void randomizeAxisAngle(Random random, double minMaxAngle, AxisAngleBasics axisAngleToRandomize)
    {
-      // Generate uniformly random point on the unit-sphere (based on http://mathworld.wolfram.com/SpherePointPicking.html )
+      // Generate uniformly random point on unit sphere (based on http://mathworld.wolfram.com/SpherePointPicking.html )
+      double height = 2.0 * random.nextDouble() - 1.0;
       double angle = nextDouble(random, minMaxAngle);
-      axisAngleToRandomize.set(EuclidCoreRandomTools.nextVector3D(random), angle);
+      double radius = EuclidCoreTools.squareRoot(1.0 - height * height);
+      axisAngleToRandomize.set(radius * EuclidCoreTools.cos(angle), radius * EuclidCoreTools.sin(angle), height, angle);
    }
 
    /**
