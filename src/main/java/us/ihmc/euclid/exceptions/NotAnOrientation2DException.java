@@ -39,7 +39,6 @@ public class NotAnOrientation2DException extends RuntimeException
     */
    public NotAnOrientation2DException(Orientation3DReadOnly orientation3DReadOnly)
    {
-      super("The orientation is not in XY plane: \n" + orientation3DReadOnly);
+      super("The orientation is not in XY plane: \n" + orientation3DReadOnly.toString(null));
    }
-
 }

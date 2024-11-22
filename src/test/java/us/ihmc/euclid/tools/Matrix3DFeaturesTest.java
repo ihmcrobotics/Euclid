@@ -1,27 +1,21 @@
 package us.ihmc.euclid.tools;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import static us.ihmc.euclid.EuclidTestConstants.ITERATIONS;
-
-import java.util.Random;
-import java.util.stream.DoubleStream;
-
 import org.ejml.MatrixDimensionException;
 import org.ejml.data.DMatrixRMaj;
 import org.ejml.dense.row.CommonOps_DDRM;
 import org.junit.jupiter.api.Test;
-
 import us.ihmc.euclid.exceptions.NotAMatrix2DException;
 import us.ihmc.euclid.exceptions.NotAPositiveDefiniteMatrixException;
 import us.ihmc.euclid.exceptions.NotARotationMatrixException;
 import us.ihmc.euclid.matrix.Matrix3D;
 import us.ihmc.euclid.matrix.RotationMatrix;
 import us.ihmc.euclid.matrix.interfaces.Matrix3DReadOnly;
-import us.ihmc.euclid.tuple3D.Vector3D;
+
+import java.util.Random;
+import java.util.stream.DoubleStream;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static us.ihmc.euclid.EuclidTestConstants.ITERATIONS;
 
 public class Matrix3DFeaturesTest
 {
@@ -54,7 +48,7 @@ public class Matrix3DFeaturesTest
    }
 
    @Test
-   public void testCheckIfPositiveDefiniteMatrixAndIsPositiveDefiniteMatrix() throws Exception
+   public void testCheckIfPositiveDefiniteMatrixAndIsPositiveDefiniteMatrix()
    {
       Random random = new Random(93486534L);
       Matrix3D matrix = new Matrix3D();
@@ -244,9 +238,9 @@ public class Matrix3DFeaturesTest
          if (isPositiveDefiniteMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().equals("The matrix is not a positive definite matrix: \n" + matrix));
+         assertEquals(e.getMessage(), "The matrix is not a positive definite matrix: \n" + matrix.toString(null));
       }
-      assertTrue(Matrix3DFeatures.isPositiveDefiniteMatrix(m00, m01, m02, m10, m11, m12, m20, m21, m22) == isPositiveDefiniteMatrix);
+      assertEquals(Matrix3DFeatures.isPositiveDefiniteMatrix(m00, m01, m02, m10, m11, m12, m20, m21, m22), isPositiveDefiniteMatrix);
 
       try
       {
@@ -259,15 +253,15 @@ public class Matrix3DFeaturesTest
          if (isPositiveDefiniteMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().equals("The matrix is not a positive definite matrix: \n" + matrix));
+         assertEquals(e.getMessage(), "The matrix is not a positive definite matrix: \n" + matrix.toString(null));
       }
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
-      assertTrue(matrix.isPositiveDefiniteMatrix() == isPositiveDefiniteMatrix);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
+      assertEquals(matrix.isPositiveDefiniteMatrix(), isPositiveDefiniteMatrix);
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
 
       try
       {
@@ -280,11 +274,11 @@ public class Matrix3DFeaturesTest
          if (isPositiveDefiniteMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().contains("The matrix is not a positive definite matrix: \n" + matrix));
+         assertTrue(e.getMessage().contains("The matrix is not a positive definite matrix: \n" + matrix.toString(null)));
       }
       for (int index = 0; index < denseMatrix.getNumElements(); index++)
-         assertTrue(Double.compare(denseMatrix.get(index), denseMatrixCopy.get(index)) == 0);
-      assertTrue(Matrix3DFeatures.isPositiveDefiniteMatrix(denseMatrix) == isPositiveDefiniteMatrix);
+         assertEquals(0, Double.compare(denseMatrix.get(index), denseMatrixCopy.get(index)));
+      assertEquals(Matrix3DFeatures.isPositiveDefiniteMatrix(denseMatrix), isPositiveDefiniteMatrix);
 
       try
       {
@@ -297,18 +291,18 @@ public class Matrix3DFeaturesTest
          if (isPositiveDefiniteMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().contains("The matrix is not a positive definite matrix: \n" + matrix));
+         assertTrue(e.getMessage().contains("The matrix is not a positive definite matrix: \n" + matrix.toString(null)));
       }
       for (int index = 0; index < 9; index++)
-         assertTrue(Double.compare(matrixArray[index], matrixArrayCopy[index]) == 0);
-      assertTrue(Matrix3DFeatures.isPositiveDefiniteMatrix(matrixArray) == isPositiveDefiniteMatrix);
+         assertEquals(0, Double.compare(matrixArray[index], matrixArrayCopy[index]));
+      assertEquals(Matrix3DFeatures.isPositiveDefiniteMatrix(matrixArray), isPositiveDefiniteMatrix);
       for (int index = 0; index < 9; index++)
-         assertTrue(Double.compare(matrixArray[index], matrixArrayCopy[index]) == 0);
+         assertEquals(0, Double.compare(matrixArray[index], matrixArrayCopy[index]));
    }
 
    /** This is a tough one to test. */
    @Test
-   public void testCheckIfRotationMatrixAndIsRotationMatrix() throws Exception
+   public void testCheckIfRotationMatrixAndIsRotationMatrix()
    {
       Random random = new Random(93486534L);
       Matrix3D matrix = new Matrix3D();
@@ -445,9 +439,9 @@ public class Matrix3DFeaturesTest
          if (isRotationMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().equals("The matrix is not a rotation matrix: \n" + matrix));
+         assertEquals(e.getMessage(), "The matrix is not a rotation matrix: \n" + matrix.toString(null));
       }
-      assertTrue(Matrix3DFeatures.isRotationMatrix(m00, m01, m02, m10, m11, m12, m20, m21, m22) == isRotationMatrix);
+      assertEquals(Matrix3DFeatures.isRotationMatrix(m00, m01, m02, m10, m11, m12, m20, m21, m22), isRotationMatrix);
 
       try
       {
@@ -460,15 +454,15 @@ public class Matrix3DFeaturesTest
          if (isRotationMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().equals("The matrix is not a rotation matrix: \n" + matrix));
+         assertEquals(e.getMessage(), "The matrix is not a rotation matrix: \n" + matrix.toString(null));
       }
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
-      assertTrue(matrix.isRotationMatrix() == isRotationMatrix);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
+      assertEquals(matrix.isRotationMatrix(), isRotationMatrix);
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
 
       try
       {
@@ -481,11 +475,11 @@ public class Matrix3DFeaturesTest
          if (isRotationMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().contains("The matrix is not a rotation matrix: \n" + matrix));
+         assertTrue(e.getMessage().contains("The matrix is not a rotation matrix: \n" + matrix.toString(null)));
       }
       for (int index = 0; index < denseMatrix.getNumElements(); index++)
-         assertTrue(Double.compare(denseMatrix.get(index), denseMatrixCopy.get(index)) == 0);
-      assertTrue(Matrix3DFeatures.isRotationMatrix(denseMatrix) == isRotationMatrix);
+         assertEquals(0, Double.compare(denseMatrix.get(index), denseMatrixCopy.get(index)));
+      assertEquals(Matrix3DFeatures.isRotationMatrix(denseMatrix), isRotationMatrix);
 
       try
       {
@@ -498,17 +492,17 @@ public class Matrix3DFeaturesTest
          if (isRotationMatrix)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().contains("The matrix is not a rotation matrix: \n" + matrix));
+         assertTrue(e.getMessage().contains("The matrix is not a rotation matrix: \n" + matrix.toString(null)));
       }
       for (int index = 0; index < 9; index++)
-         assertTrue(Double.compare(matrixArray[index], matrixArrayCopy[index]) == 0);
-      assertTrue(Matrix3DFeatures.isRotationMatrix(matrixArray) == isRotationMatrix);
+         assertEquals(0, Double.compare(matrixArray[index], matrixArrayCopy[index]));
+      assertEquals(Matrix3DFeatures.isRotationMatrix(matrixArray), isRotationMatrix);
       for (int index = 0; index < 9; index++)
-         assertTrue(Double.compare(matrixArray[index], matrixArrayCopy[index]) == 0);
+         assertEquals(0, Double.compare(matrixArray[index], matrixArrayCopy[index]));
    }
 
    @Test
-   public void testCheckIfMatrix2DAndIsMatrix2D() throws Exception
+   public void testCheckIfMatrix2DAndIsMatrix2D()
    {
       Random random = new Random(93486534L);
 
@@ -576,9 +570,9 @@ public class Matrix3DFeaturesTest
       double m20 = matrix.getM20();
       double m21 = matrix.getM21();
       double m22 = matrix.getM22();
-      String matrixAsString = EuclidCoreIOTools.getMatrix3DString(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+      String matrixAsString = EuclidCoreIOTools.getMatrix3DString(null, m00, m01, m02, m10, m11, m12, m20, m21, m22);
 
-      assertTrue(Matrix3DFeatures.isMatrix2D(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_2D) == isMatrix2D);
+      assertEquals(Matrix3DFeatures.isMatrix2D(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_2D), isMatrix2D);
 
       try
       {
@@ -591,21 +585,21 @@ public class Matrix3DFeaturesTest
          if (isMatrix2D)
             throw e;
          // else it is good
-         assertTrue(e.getMessage().equals("The matrix is not in XY plane: \n" + matrixAsString));
+         assertEquals(e.getMessage(), "The matrix is not in XY plane: \n" + matrixAsString);
       }
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
 
-      assertTrue(matrix.isMatrix2D() == isMatrix2D);
+      assertEquals(matrix.isMatrix2D(), isMatrix2D);
 
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
    }
 
    @Test
-   public void testCheckMatrixSize() throws Exception
+   public void testCheckMatrixSize()
    {
       // Also test the check on the DMatrixRMaj dimension
       try
@@ -615,7 +609,7 @@ public class Matrix3DFeaturesTest
       }
       catch (RuntimeException e)
       {
-         assertTrue(e.getMessage().equals("Unexpected matrix size: 2-by-3. Must be 3-by-3."));
+         assertEquals("Unexpected matrix size: 2-by-3. Must be 3-by-3.", e.getMessage());
       }
 
       try
@@ -625,7 +619,7 @@ public class Matrix3DFeaturesTest
       }
       catch (RuntimeException e)
       {
-         assertTrue(e.getMessage().equals("Unexpected matrix size: 3-by-2. Must be 3-by-3."));
+         assertEquals("Unexpected matrix size: 3-by-2. Must be 3-by-3.", e.getMessage());
       }
 
       try
@@ -635,7 +629,7 @@ public class Matrix3DFeaturesTest
       }
       catch (RuntimeException e)
       {
-         assertTrue(e.getMessage().equals("Unexpected matrix size: 4-by-3. Must be 3-by-3."));
+         assertEquals("Unexpected matrix size: 4-by-3. Must be 3-by-3.", e.getMessage());
       }
 
       try
@@ -645,12 +639,12 @@ public class Matrix3DFeaturesTest
       }
       catch (RuntimeException e)
       {
-         assertTrue(e.getMessage().equals("Unexpected matrix size: 3-by-4. Must be 3-by-3."));
+         assertEquals("Unexpected matrix size: 3-by-4. Must be 3-by-3.", e.getMessage());
       }
    }
 
    @Test
-   public void testDeterminant() throws Exception
+   public void testDeterminant()
    {
       Random random = new Random(641651L);
       DMatrixRMaj denseMatrix = new DMatrixRMaj(3, 3);
@@ -862,7 +856,7 @@ public class Matrix3DFeaturesTest
    }
 
    @Test
-   public void testIsIdentity() throws Exception
+   public void testIsIdentity()
    {
       Random random = new Random(982364L);
       Matrix3D matrix = new Matrix3D();
@@ -925,18 +919,18 @@ public class Matrix3DFeaturesTest
       double m21 = matrix.getM21();
       double m22 = matrix.getM22();
 
-      assertTrue(Matrix3DFeatures.isIdentity(m00, m01, m02, m10, m11, m12, m20, m21, m22) == isIdentity);
-      assertTrue(Matrix3DFeatures.isIdentity(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_IDENTITY) == isIdentity);
+      assertEquals(Matrix3DFeatures.isIdentity(m00, m01, m02, m10, m11, m12, m20, m21, m22), isIdentity);
+      assertEquals(Matrix3DFeatures.isIdentity(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_IDENTITY), isIdentity);
 
-      assertTrue(matrix.isIdentity(Matrix3DFeatures.EPS_CHECK_IDENTITY) == isIdentity);
+      assertEquals(matrix.isIdentity(Matrix3DFeatures.EPS_CHECK_IDENTITY), isIdentity);
 
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
    }
 
    @Test
-   public void testIsZero() throws Exception
+   public void testIsZero()
    {
       Random random = new Random(982364L);
       Matrix3D matrix = new Matrix3D();
@@ -999,18 +993,18 @@ public class Matrix3DFeaturesTest
       double m21 = matrix.getM21();
       double m22 = matrix.getM22();
 
-      assertTrue(Matrix3DFeatures.isZero(m00, m01, m02, m10, m11, m12, m20, m21, m22) == isZero);
-      assertTrue(Matrix3DFeatures.isZero(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_IDENTITY) == isZero);
+      assertEquals(Matrix3DFeatures.isZero(m00, m01, m02, m10, m11, m12, m20, m21, m22), isZero);
+      assertEquals(Matrix3DFeatures.isZero(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_IDENTITY), isZero);
 
-      assertTrue(matrix.isZero(Matrix3DFeatures.EPS_CHECK_IDENTITY) == isZero);
+      assertEquals(matrix.isZero(Matrix3DFeatures.EPS_CHECK_IDENTITY), isZero);
 
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
    }
 
    @Test
-   public void testIsMatrixSkewSymmetric() throws Exception
+   public void testIsMatrixSkewSymmetric()
    {
       Random random = new Random(982364L);
       Matrix3D matrix = new Matrix3D();
@@ -1094,14 +1088,14 @@ public class Matrix3DFeaturesTest
       double m21 = matrix.getM21();
       double m22 = matrix.getM22();
 
-      assertTrue(Matrix3DFeatures.isMatrixSkewSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22) == isSkewSymmetric);
-      assertTrue(Matrix3DFeatures.isMatrixSkewSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_SKEW) == isSkewSymmetric);
+      assertEquals(Matrix3DFeatures.isMatrixSkewSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22), isSkewSymmetric);
+      assertEquals(Matrix3DFeatures.isMatrixSkewSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_SKEW), isSkewSymmetric);
 
-      assertTrue(matrix.isMatrixSkewSymmetric(Matrix3DFeatures.EPS_CHECK_SKEW) == isSkewSymmetric);
+      assertEquals(matrix.isMatrixSkewSymmetric(Matrix3DFeatures.EPS_CHECK_SKEW), isSkewSymmetric);
 
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
    }
 
    @Test
@@ -1177,14 +1171,14 @@ public class Matrix3DFeaturesTest
       double m21 = matrix.getM21();
       double m22 = matrix.getM22();
 
-      assertTrue(Matrix3DFeatures.isMatrixSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22) == isSymmetric);
-      assertTrue(Matrix3DFeatures.isMatrixSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_SYMMETRIC) == isSymmetric);
+      assertEquals(Matrix3DFeatures.isMatrixSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22), isSymmetric);
+      assertEquals(Matrix3DFeatures.isMatrixSymmetric(m00, m01, m02, m10, m11, m12, m20, m21, m22, Matrix3DFeatures.EPS_CHECK_SYMMETRIC), isSymmetric);
 
-      assertTrue(matrix.isMatrixSymmetric(Matrix3DFeatures.EPS_CHECK_SKEW) == isSymmetric);
+      assertEquals(matrix.isMatrixSymmetric(Matrix3DFeatures.EPS_CHECK_SKEW), isSymmetric);
 
       for (int row = 0; row < 3; row++)
          for (int column = 0; column < 3; column++)
-            assertTrue(Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)) == 0);
+            assertEquals(0, Double.compare(matrix.getElement(row, column), matrixCopy.getElement(row, column)));
    }
 
    @Test

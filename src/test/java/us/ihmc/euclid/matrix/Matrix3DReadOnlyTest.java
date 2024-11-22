@@ -1,16 +1,8 @@
 package us.ihmc.euclid.matrix;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static us.ihmc.euclid.EuclidTestConstants.ITERATIONS;
-
-import java.util.Random;
-
 import org.ejml.data.DMatrix;
 import org.ejml.data.DMatrixRMaj;
 import org.junit.jupiter.api.Test;
-
 import us.ihmc.euclid.exceptions.NotAMatrix2DException;
 import us.ihmc.euclid.exceptions.NotARotationMatrixException;
 import us.ihmc.euclid.exceptions.NotAnOrientation2DException;
@@ -23,6 +15,11 @@ import us.ihmc.euclid.tools.Matrix3DTools;
 import us.ihmc.euclid.tuple2D.Vector2D;
 import us.ihmc.euclid.tuple3D.Vector3D;
 import us.ihmc.euclid.tuple4D.Vector4D;
+
+import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static us.ihmc.euclid.EuclidTestConstants.ITERATIONS;
 
 public abstract class Matrix3DReadOnlyTest<T extends Matrix3DReadOnly>
 {
@@ -276,7 +273,7 @@ public abstract class Matrix3DReadOnlyTest<T extends Matrix3DReadOnly>
 
       T matrix1 = createMatrix(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
       EuclidCoreTestTools.assertExceptionIsThrown(() -> matrix1.checkIfRotationMatrix(),
-                                                  "The matrix is not a rotation matrix: \n" + matrix1,
+                                                  "The matrix is not a rotation matrix: \n" + matrix1.toString(null),
                                                   NotARotationMatrixException.class);
 
       T matrix2 = createMatrix(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
@@ -291,7 +288,9 @@ public abstract class Matrix3DReadOnlyTest<T extends Matrix3DReadOnly>
 
       double d = EuclidCoreRandomTools.nextDouble(random, 5.0);
       T matrix1 = createMatrix(0.0, 0.0, d, 0.0, 0.0, d, d, d, d);
-      EuclidCoreTestTools.assertExceptionIsThrown(() -> matrix1.checkIfMatrix2D(), "The matrix is not in XY plane: \n" + matrix1, NotAMatrix2DException.class);
+      EuclidCoreTestTools.assertExceptionIsThrown(() -> matrix1.checkIfMatrix2D(),
+                                                  "The matrix is not in XY plane: \n" + matrix1.toString(null),
+                                                  NotAMatrix2DException.class);
 
       T matrix2 = createMatrix(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
       matrix2.checkIfMatrix2D();

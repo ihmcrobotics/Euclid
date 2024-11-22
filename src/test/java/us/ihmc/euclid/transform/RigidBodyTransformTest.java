@@ -741,7 +741,7 @@ public class RigidBodyTransformTest extends RigidBodyTransformBasicsTest<RigidBo
       catch (NotAnOrientation2DException e)
       {
          // good
-         assertTrue(e.getMessage().equals("The orientation is not in XY plane: \n" + transform.getRotation()));
+         assertEquals(e.getMessage(), "The orientation is not in XY plane: \n" + transform.getRotation().toString(null));
       }
 
       transform.getRotation().setUnsafe(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);

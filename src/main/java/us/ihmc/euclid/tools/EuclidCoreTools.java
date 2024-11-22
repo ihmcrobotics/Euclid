@@ -797,7 +797,23 @@ public class EuclidCoreTools
     * @param c the third argument to compare.
     * @return the maximum value of the three arguments.
     */
-   public static final double max(double a, double b, double c)
+   public static double max(double a, double b, double c)
+   {
+      if (a > b)
+         return a > c ? a : c;
+      else
+         return b > c ? b : c;
+   }
+
+   /**
+    * Find and return the argument with the maximum value.
+    *
+    * @param a the first argument to compare.
+    * @param b the second argument to compare.
+    * @param c the third argument to compare.
+    * @return the maximum value of the three arguments.
+    */
+   public static int max(int a, int b, int c)
    {
       if (a > b)
          return a > c ? a : c;
@@ -833,6 +849,33 @@ public class EuclidCoreTools
    }
 
    /**
+    * Find and return the argument with the maximum value.
+    *
+    * @param a the first argument to compare.
+    * @param b the second argument to compare.
+    * @param c the third argument to compare.
+    * @param d the fourth argument to compare.
+    * @return the maximum value of the four arguments.
+    */
+   public static int max(int a, int b, int c, int d)
+   {
+      if (a > b)
+      {
+         if (a > c)
+            return a > d ? a : d;
+         else
+            return c > d ? c : d;
+      }
+      else
+      {
+         if (b > c)
+            return b > d ? b : d;
+         else
+            return c > d ? c : d;
+      }
+   }
+
+   /**
     * Find and return the argument with the minimum value.
     *
     * @param a the first argument to compare.
@@ -840,7 +883,23 @@ public class EuclidCoreTools
     * @param c the third argument to compare.
     * @return the minimum value of the three arguments.
     */
-   public static final double min(double a, double b, double c)
+   public static double min(double a, double b, double c)
+   {
+      if (a < b)
+         return a < c ? a : c;
+      else
+         return b < c ? b : c;
+   }
+
+   /**
+    * Find and return the argument with the minimum value.
+    *
+    * @param a the first argument to compare.
+    * @param b the second argument to compare.
+    * @param c the third argument to compare.
+    * @return the minimum value of the three arguments.
+    */
+   public static int min(int a, int b, int c)
    {
       if (a < b)
          return a < c ? a : c;
@@ -876,6 +935,33 @@ public class EuclidCoreTools
    }
 
    /**
+    * Find and return the argument with the minimum value.
+    *
+    * @param a the first argument to compare.
+    * @param b the second argument to compare.
+    * @param c the third argument to compare.
+    * @param d the fourth argument to compare.
+    * @return the minimum value of the four arguments.
+    */
+   public static int min(int a, int b, int c, int d)
+   {
+      if (a < b)
+      {
+         if (a < c)
+            return a < d ? a : d;
+         else
+            return c < d ? c : d;
+      }
+      else
+      {
+         if (b < c)
+            return b < d ? b : d;
+         else
+            return c < d ? c : d;
+      }
+   }
+
+   /**
     * Find and return the argument with the value in between the two others.
     *
     * @param a the first argument to compare.
@@ -883,7 +969,33 @@ public class EuclidCoreTools
     * @param c the third argument to compare.
     * @return the value in between the two other arguments.
     */
-   public static final double med(double a, double b, double c)
+   public static double med(double a, double b, double c)
+   {
+      if (a > b)
+      {
+         if (a > c)
+            return b > c ? b : c;
+         else
+            return a;
+      }
+      else
+      {
+         if (b > c)
+            return a > c ? a : c;
+         else
+            return b;
+      }
+   }
+
+   /**
+    * Find and return the argument with the value in between the two others.
+    *
+    * @param a the first argument to compare.
+    * @param b the second argument to compare.
+    * @param c the third argument to compare.
+    * @return the value in between the two other arguments.
+    */
+   public static int med(int a, int b, int c)
    {
       if (a > b)
       {

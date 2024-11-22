@@ -1,10 +1,5 @@
 package us.ihmc.euclid.tools;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.function.Function;
-
 import us.ihmc.euclid.axisAngle.interfaces.AxisAngleReadOnly;
 import us.ihmc.euclid.matrix.interfaces.Matrix3DReadOnly;
 import us.ihmc.euclid.orientation.interfaces.Orientation2DReadOnly;
@@ -17,6 +12,11 @@ import us.ihmc.euclid.tuple3D.interfaces.Tuple3DReadOnly;
 import us.ihmc.euclid.tuple4D.interfaces.QuaternionReadOnly;
 import us.ihmc.euclid.tuple4D.interfaces.Tuple4DReadOnly;
 import us.ihmc.euclid.yawPitchRoll.interfaces.YawPitchRollReadOnly;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * {@code EuclidCoreIOTools} is intended to gather the input & output tools for printing, saving,
@@ -508,10 +508,51 @@ public class EuclidCoreIOTools
                                           double m21,
                                           double m22)
    {
-      String ret = getStringOf("/", " \\\n", ", ", format, m00, m01, m02);
-      ret += getStringOf("|", " |\n", ", ", format, m10, m11, m12);
-      ret += getStringOf("\\", " /", ", ", format, m20, m21, m22);
-      return ret;
+      // First transform all the numbers into strings with the given format and find the maximum length per column.
+      String m00String = toString(format, m00);
+      String m01String = toString(format, m01);
+      String m02String = toString(format, m02);
+      String m10String = toString(format, m10);
+      String m11String = toString(format, m11);
+      String m12String = toString(format, m12);
+      String m20String = toString(format, m20);
+      String m21String = toString(format, m21);
+      String m22String = toString(format, m22);
+
+      int c0Length = EuclidCoreTools.max(m00String.length(), m10String.length(), m20String.length());
+      int c1Length = EuclidCoreTools.max(m01String.length(), m11String.length(), m21String.length());
+      int c2Length = EuclidCoreTools.max(m02String.length(), m12String.length(), m22String.length());
+
+      // Then reformat the strings to have the same length per column.
+      m00String = centerPadString(m00String, c0Length);
+      m01String = centerPadString(m01String, c1Length);
+      m02String = centerPadString(m02String, c2Length);
+      m10String = centerPadString(m10String, c0Length);
+      m11String = centerPadString(m11String, c1Length);
+      m12String = centerPadString(m12String, c2Length);
+      m20String = centerPadString(m20String, c0Length);
+      m21String = centerPadString(m21String, c1Length);
+      m22String = centerPadString(m22String, c2Length);
+
+      return "/%s, %s, %s \\\n|%s, %s, %s |\n\\%s, %s, %s /".formatted(m00String,
+                                                                       m01String,
+                                                                       m02String,
+                                                                       m10String,
+                                                                       m11String,
+                                                                       m12String,
+                                                                       m20String,
+                                                                       m21String,
+                                                                       m22String);
+   }
+
+   private static String centerPadString(String in, int desiredLength)
+   {
+      int padLength = desiredLength - in.length();
+      if (padLength < 0)
+         return in;
+      int padRight = padLength / 2;
+      int padLeft = padLength - padRight;
+      return " ".repeat(padLeft) + in + " ".repeat(padRight);
    }
 
    /**

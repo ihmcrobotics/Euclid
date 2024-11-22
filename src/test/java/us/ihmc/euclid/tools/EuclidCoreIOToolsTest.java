@@ -217,13 +217,13 @@ public class EuclidCoreIOToolsTest
       assertEquals(expected, EuclidCoreIOTools.getMatrix3DString(t));
       assertEquals(expected, EuclidCoreIOTools.getMatrix3DString(EuclidCoreIOTools.DEFAULT_FORMAT, t));
       assertEquals("null", EuclidCoreIOTools.getMatrix3DString(null));
-      expected = "/0.1639445, -0.5595418, 0.9690608 \\\n"//
-                 + "|0.0275034, -0.6188257, 0.7012089 |\n"//
-                 + "\\-0.0728161, 0.6787342, -0.4460624 /";
+      expected = "/ 0.1639445, -0.5595418,  0.9690608 \\\n"//
+                 + "| 0.0275034, -0.6188257,  0.7012089 |\n"//
+                 + "\\-0.0728161,  0.6787342, -0.4460624 /";
       assertEquals(expected, EuclidCoreIOTools.getMatrix3DString(randomFormat, t));
-      expected = "/0.16394446573547383, -0.559541839804184, 0.9690607506715772 \\\n"//
-                 + "|0.02750342450772747, -0.6188257166341338, 0.7012089076126404 |\n"//
-                 + "\\-0.0728161024676699, 0.6787341699515741, -0.4460623648325692 /";
+      expected = "/0.16394446573547383,  -0.559541839804184,  0.9690607506715772 \\\n"//
+                 + "|0.02750342450772747, -0.6188257166341338,  0.7012089076126404 |\n"//
+                 + "\\-0.0728161024676699,  0.6787341699515741, -0.4460623648325692 /";
       assertEquals(expected, EuclidCoreIOTools.getMatrix3DString(null, t));
    }
 

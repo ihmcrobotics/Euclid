@@ -485,6 +485,27 @@ public class EuclidCoreToolsTest
          double actual = EuclidCoreTools.max(a, b, c, d);
          assertEquals(expected, actual);
       }
+
+      for (int i = 0; i < ITERATIONS; i++)
+      {
+         int a = random.nextInt();
+         int b = random.nextInt();
+         int c = random.nextInt();
+         int expected = Math.max(a, Math.max(b, c));
+         int actual = EuclidCoreTools.max(a, b, c);
+         assertEquals(expected, actual);
+      }
+
+      for (int i = 0; i < ITERATIONS; i++)
+      {
+         int a = random.nextInt();
+         int b = random.nextInt();
+         int c = random.nextInt();
+         int d = random.nextInt();
+         int expected = Math.max(a, Math.max(b, Math.max(c, d)));
+         int actual = EuclidCoreTools.max(a, b, c, d);
+         assertEquals(expected, actual);
+      }
    }
 
    @Test
@@ -512,6 +533,27 @@ public class EuclidCoreToolsTest
          double actual = EuclidCoreTools.min(a, b, c, d);
          assertEquals(expected, actual);
       }
+
+      for (int i = 0; i < ITERATIONS; i++)
+      {
+         int a = random.nextInt();
+         int b = random.nextInt();
+         int c = random.nextInt();
+         int expected = Math.min(a, Math.min(b, c));
+         int actual = EuclidCoreTools.min(a, b, c);
+         assertEquals(expected, actual);
+      }
+
+      for (int i = 0; i < ITERATIONS; i++)
+      {
+         int a = random.nextInt();
+         int b = random.nextInt();
+         int c = random.nextInt();
+         int d = random.nextInt();
+         int expected = Math.min(a, Math.min(b, Math.min(c, d)));
+         int actual = EuclidCoreTools.min(a, b, c, d);
+         assertEquals(expected, actual);
+      }
    }
 
    @Test
@@ -528,6 +570,20 @@ public class EuclidCoreToolsTest
          Arrays.sort(sorted);
          double expected = sorted[1];
          double actual = EuclidCoreTools.med(a, b, c);
+         if (expected != actual)
+            EuclidCoreTools.med(a, b, c);
+         assertEquals(expected, actual, "a = " + a + ", b = " + b + ", c = " + c);
+      }
+
+      for (int i = 0; i < ITERATIONS; i++)
+      {
+         int a = random.nextInt();
+         int b = random.nextInt();
+         int c = random.nextInt();
+         int[] sorted = {a, b, c};
+         Arrays.sort(sorted);
+         int expected = sorted[1];
+         int actual = EuclidCoreTools.med(a, b, c);
          if (expected != actual)
             EuclidCoreTools.med(a, b, c);
          assertEquals(expected, actual, "a = " + a + ", b = " + b + ", c = " + c);

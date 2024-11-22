@@ -40,7 +40,7 @@ public class NotAMatrix2DException extends RuntimeException
     */
    public NotAMatrix2DException(Matrix3DReadOnly matrix)
    {
-      super("The matrix is not in XY plane: \n" + matrix);
+      super("The matrix is not in XY plane: \n" + matrix.toString(null));
    }
 
    /**
@@ -68,6 +68,6 @@ public class NotAMatrix2DException extends RuntimeException
     */
    public NotAMatrix2DException(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22)
    {
-      super("The matrix is not in XY plane: \n" + EuclidCoreIOTools.getMatrix3DString(m00, m01, m02, m10, m11, m12, m20, m21, m22));
+      super("The matrix is not in XY plane: \n" + EuclidCoreIOTools.getMatrix3DString(null, m00, m01, m02, m10, m11, m12, m20, m21, m22));
    }
 }

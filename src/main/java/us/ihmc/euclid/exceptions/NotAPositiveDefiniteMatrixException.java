@@ -38,7 +38,7 @@ public class NotAPositiveDefiniteMatrixException extends RuntimeException
     */
    public NotAPositiveDefiniteMatrixException(Matrix3DReadOnly matrix)
    {
-      super("The matrix is not a positive definite matrix: \n" + matrix);
+      super("The matrix is not a positive definite matrix: \n" + matrix.toString(null));
    }
 
    /**
@@ -66,6 +66,6 @@ public class NotAPositiveDefiniteMatrixException extends RuntimeException
     */
    public NotAPositiveDefiniteMatrixException(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22)
    {
-      super("The matrix is not a positive definite matrix: \n" + EuclidCoreIOTools.getMatrix3DString(m00, m01, m02, m10, m11, m12, m20, m21, m22));
+      super("The matrix is not a positive definite matrix: \n" + EuclidCoreIOTools.getMatrix3DString(null, m00, m01, m02, m10, m11, m12, m20, m21, m22));
    }
 }
